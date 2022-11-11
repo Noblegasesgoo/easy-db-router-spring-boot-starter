@@ -16,4 +16,6 @@ public class Constant {
     public static final Integer ONE = 1;
 
     public static final Integer TWO = 2;
+
+    public static final String PREFIX = "my-db-router.jdbc.datasource.";
 }
