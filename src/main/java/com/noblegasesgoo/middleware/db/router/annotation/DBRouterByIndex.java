@@ -8,19 +8,14 @@ import java.lang.annotation.*;
  * @ProjectName: my-db-router-spring-boot-starter
  * @version: 0.0.1
  * @FileName: DBRouter
- * @Description: 路由注解
+ * @Description: index-type注解，通过key-index与key-type来唯一确认被路由的键，
+ *               如果入参是多个基本类型形参，请用该注解。
  */
 
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
-public @interface DBRouter {
-
-    /**
-     * 被用来做分库分表的字段
-     */
-    @Deprecated
-    String key() default "";
+public @interface DBRouterByIndex {
 
     /**
      * 该字段在方法中对应参数位置下标，从0开始
