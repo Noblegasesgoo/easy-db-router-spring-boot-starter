@@ -1,12 +1,13 @@
 package com.noblegasesgoo.middleware.db.router.config;
 
-import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.aspect.DBRouterJoinPointByIndex;
+import com.noblegasesgoo.middleware.db.router.aspect.DBRouterJoinPointByObject;
+import com.noblegasesgoo.middleware.db.router.common.BaseConstants;
 import com.noblegasesgoo.middleware.db.router.dynamic.DynamicDataSource;
 import com.noblegasesgoo.middleware.db.router.dynamic.DynamicMybatisPlugin;
+import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
 import com.noblegasesgoo.middleware.db.router.strategy.impl.DBRouterStrategyHashCode;
 import com.noblegasesgoo.middleware.db.router.util.PropertyUtil;
-import com.noblegasesgoo.middleware.db.router.aspect.DBRouterJoinPoint;
-import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
 import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.EnvironmentAware;
@@ -68,15 +69,21 @@ public class DataSourceAutoConfig implements EnvironmentAware {
         return new DynamicMybatisPlugin();
     }
 
-    @Bean(name = "db-router-point")
+    @Bean(name = "dbRouterPointByIndex")
     @ConditionalOnMissingBean
-    public DBRouterJoinPoint point(DBRouterConfig dbRouterConfig, IDBRouterStrategy dbRouterStrategy) {
-        return new DBRouterJoinPoint(dbRouterConfig, dbRouterStrategy);
+    public DBRouterJoinPointByIndex dbRouterPointByIndex(DBRouterConfig dbRouterConfig, IDBRouterStrategy dbRouterStrategy) {
+        return new DBRouterJoinPointByIndex(dbRouterConfig, dbRouterStrategy);
+    }
+
+    @Bean(name = "dbRouterPointByObject")
+    @ConditionalOnMissingBean
+    public DBRouterJoinPointByObject dbRouterPointByObject(DBRouterConfig dbRouterConfig, IDBRouterStrategy dbRouterStrategy) {
+        return new DBRouterJoinPointByObject(dbRouterConfig, dbRouterStrategy);
     }
 
     @Override
     public void setEnvironment(Environment environment) {
-        String prefix = Constant.PREFIX;
+        String prefix = BaseConstants.PREFIX;
 
         dbCount = Integer.valueOf(environment.getProperty(prefix + "dbCount"));
         tableCount = Integer.valueOf(environment.getProperty(prefix + "tableCount"));
