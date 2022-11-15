@@ -1,4 +1,4 @@
-package com.zhao.middleware.test;
+package com.noblegasesgoo.middleware.test;
 
 import com.noblegasesgoo.middleware.db.router.annotation.DBRouter;
 

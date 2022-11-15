@@ -1,4 +1,4 @@
-package com.zhao.middleware.test;
+package com.noblegasesgoo.middleware.test;
 
 /**
  * @author: noblegasesgoo
