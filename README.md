@@ -1,6 +1,6 @@
 # 版本介绍
-- v1：使用 `key` 字段 所对应的字段名称来匹配需要用于分库分表的方法参数，仅支持String类型的参数。
-- v2: 抛弃 `key` 字段，引入 `keyIndex` 与 `keyType` 来**唯一确认**需要用于分库分表的方法参数，支持 `int、short、long、float、double、char、String、boolean` 类型。
+- ✨v1: 使用 `key` 字段 所对应的字段名称来匹配需要用于分库分表的方法参数，仅支持String类型的参数。
+- ✨v2: 抛弃 `key` 字段，引入 `keyIndex` 与 `keyType` 来**唯一确认**需要用于分库分表的方法参数，支持 `int、short、long、float、double、char、String、boolean` 类型。
 
 # 待开发日程
 - 支持通过**自定义对象**确认需要用于分库分表的方法参数。
