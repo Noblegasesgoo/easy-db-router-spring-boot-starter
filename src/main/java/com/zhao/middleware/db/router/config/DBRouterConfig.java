@@ -26,13 +26,17 @@ public class DBRouterConfig {
      */
     private String routerKey;
 
+    /**
+     * 该字段在方法中对应参数位置下标
+     */
+    private String keyIndex;
+
     public DBRouterConfig() {
     }
 
-    public DBRouterConfig(int dbCount, int tableCount, String routerKey) {
+    public DBRouterConfig(int dbCount, int tableCount) {
         this.dbCount = dbCount;
         this.tableCount = tableCount;
-        this.routerKey = routerKey;
     }
 
     public int getDbCount() {
@@ -57,5 +61,13 @@ public class DBRouterConfig {
 
     public void setRouterKey(String routerKey) {
         this.routerKey = routerKey;
+    }
+
+    public String getKeyIndex() {
+        return keyIndex;
+    }
+
+    public void setKeyIndex(String keyIndex) {
+        this.keyIndex = keyIndex;
     }
 }

@@ -53,14 +53,9 @@ public class DataSourceAutoConfig implements EnvironmentAware {
      */
     private int tableCount;
 
-    /**
-     * 路由字段
-     */
-    private String routerKey;
-
     @Bean(name = "dbRouterConfig")
     public DBRouterConfig dbRouterConfig() {
-        return new DBRouterConfig(dbCount, tableCount, routerKey);
+        return new DBRouterConfig(dbCount, tableCount);
     }
 
     @Bean(name = "dbRouterStrategy")
@@ -85,7 +80,6 @@ public class DataSourceAutoConfig implements EnvironmentAware {
 
         dbCount = Integer.valueOf(environment.getProperty(prefix + "dbCount"));
         tableCount = Integer.valueOf(environment.getProperty(prefix + "tableCount"));
-        routerKey = environment.getProperty(prefix + "routerKey");
 
         // 分库分表数据源
         String dataSources = environment.getProperty(prefix + "list");
@@ -125,6 +119,9 @@ public class DataSourceAutoConfig implements EnvironmentAware {
     }
 
 
+    /**
+     * 把数据源的切换放在事务处理前，而事务操作也通过编程式编码进行处理
+     */
     @Bean(name = "transactionTemplate")
     public TransactionTemplate transactionTemplate(DataSource dataSource) {
         // Spring提供的TransactionTemplate 能够以编程的方式实现事务控制，是无状态而且线程安全的

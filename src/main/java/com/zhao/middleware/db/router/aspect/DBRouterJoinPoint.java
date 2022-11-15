@@ -4,7 +4,6 @@ import com.zhao.middleware.db.router.annotation.DBRouter;
 import com.zhao.middleware.db.router.common.Constant;
 import com.zhao.middleware.db.router.config.DBRouterConfig;
 import com.zhao.middleware.db.router.strategy.IDBRouterStrategy;
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author: noblegasesgoo
@@ -38,18 +38,6 @@ public class DBRouterJoinPoint {
      */
     private DBRouterConfig dbRouterConfig;
 
-    private static HashMap<String, Class> map = new HashMap<String, Class>() {
-        {
-            put("java.lang.Integer", int.class);
-            put("java.lang.Double", double.class);
-            put("java.lang.Float", float.class);
-            put("java.lang.Long", Long.class);
-            put("java.lang.Short", short.class);
-            put("java.lang.Boolean", boolean.class);
-            put("java.lang.Char", char.class);
-        }
-    };
-
     /**
      * 路由策略
      */
@@ -59,6 +47,19 @@ public class DBRouterJoinPoint {
         this.dbRouterConfig = dbRouterConfig;
         this.dbRouterStrategy = dbRouterStrategy;
     }
+
+    private static Map<String, Class> typeMap = new ConcurrentHashMap<String, Class>() {
+        {
+            put("java.lang.Integer", Integer.class);
+            put("java.lang.Double", Double.class);
+            put("java.lang.Float", Float.class);
+            put("java.lang.Long", Long.class);
+            put("java.lang.Short", Short.class);
+            put("java.lang.Boolean", Boolean.class);
+            put("java.lang.Character", Character.class);
+            put("java.lang.String", String.class);
+        }
+    };
 
     /**
      * 切点
@@ -79,16 +80,22 @@ public class DBRouterJoinPoint {
     public Object doRouter(ProceedingJoinPoint jp, DBRouter dbRouter) throws Throwable {
 
         // 确定根据哪个字段进行数据库的路由
-        String dbRouterKey = dbRouter.key();
-        // 检查当前的 key 以及路由配置类中对应的路由key是否存在了
-        if (StringUtils.isBlank(dbRouterKey) && StringUtils.isBlank(dbRouterConfig.getRouterKey())) {
-            throw new RuntimeException("annotation DBRouter key is null！");
+        String keyIndex = dbRouter.keyIndex();
+        String keyType = dbRouter.keyType();
+
+        // 检查当前的 startIndex 以及路由配置类中对应的路由startIndex是否存在了
+        if (StringUtils.isBlank(keyIndex) && StringUtils.isBlank(dbRouterConfig.getKeyIndex())) {
+            throw new RuntimeException("annotation DBRouter startIndex is null！");
         }
+
         // 最终确定数据库路由字段的值，要么从注解获取，要么从配置类中获取
-        dbRouterKey = StringUtils.isNotBlank(dbRouterKey) ? dbRouterKey : dbRouterConfig.getRouterKey();
+        keyIndex = StringUtils.isNotBlank(keyIndex) ? keyIndex : dbRouterConfig.getKeyIndex();
 
         // 根据数据库路由字段，从入参中读取出对应的值。比如路由 key 是 uId，那么就从入参对象 Obj 中获取到 uId 的值。
-        String dbKeyAttr = getAttrValue(dbRouterKey, jp.getArgs());
+        String dbKeyAttr = String.valueOf(getAttrValue(keyIndex, jp.getArgs(), typeMap.get(keyType).getName()));
+        if (Constant.NULL.equals(dbKeyAttr)) {
+            throw new RuntimeException("The parameter types of the labeled methods do not match!");
+        }
 
         // 调用路由策略
         dbRouterStrategy.doRouter(dbKeyAttr);
@@ -117,35 +124,18 @@ public class DBRouterJoinPoint {
     /**
      * 根据数据库路由字段，从入参中读取出对应的值
      * 比如路由 key 是 uId，那么就从入参对象 Obj 中获取到 uId 的值。
-     * @param dbRouterKey 被进行路由的字段
-     * @param args        被拦截方法的入参
+     * @param keyIndex 被进行路由的字段所在方法的参数下标
+     * @param args 被拦截方法的入参
      * @return 对应路由 key 在入参中的值
      */
-    public String getAttrValue(String dbRouterKey, Object[] args) {
-
-        if (Constant.ONE == args.length) {
-            Object arg = args[0];
-            if (arg instanceof String) {
-                return arg.toString();
-            }
-        }
+    public <T> T getAttrValue(String keyIndex, Object[] args, T t) {
 
         // 循环比对参数
-        String filedValue = null;
-        for (Object arg : args) {
-            try {
-                if (StringUtils.isNotBlank(filedValue)) {
-                    break;
-                }
-                // 无论使用哪种属性引用格式，都以 String 的形式返回指定 Bean 的指定属性的值。
-                // 也就是我们这里要用这个方法找到对应路由dbRouterKey的值在参数中的对应值。
-                // 使用这个方法可以增加容错率，如果我入参是整形，但是通过这个方法可以返回该整形数值对应的字符串。
-                filedValue = BeanUtils.getProperty(arg, dbRouterKey);
-            } catch (Exception e) {
-                logger.error("获取路由属性值失败 dbRouterKey：{}", dbRouterKey, e);
-            }
+        String name = args[Integer.parseInt(keyIndex)].getClass().getName();
+        if (t.equals(name)) {
+            return (T) args[Integer.parseInt(keyIndex)];
         }
 
-        return filedValue;
+        return null;
     }
 }

@@ -17,5 +17,24 @@ public class Constant {
 
     public static final Integer TWO = 2;
 
+    public static final String NULL = "null";
+
     public static final String PREFIX = "my-db-router.jdbc.datasource.";
+
+    public static final String INTEGER = "java.lang.Integer";
+
+    public static final String DOUBLE = "java.lang.Double";
+
+    public static final String FLOAT = "java.lang.Float";
+
+    public static final String LONG = "java.lang.Long";
+
+    public static final String SHORT = "java.lang.Short";
+
+    public static final String BOOLEAN = "java.lang.Boolean";
+
+    public static final String CHAR = "java.lang.Character";
+
+    public static final String STRING = "java.lang.String";
+
 }
