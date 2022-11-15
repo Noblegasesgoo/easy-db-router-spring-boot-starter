@@ -1,6 +1,6 @@
 package com.noblegasesgoo.middleware.db.router.strategy.impl;
 
-import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.common.BaseConstants;
 import com.noblegasesgoo.middleware.db.router.DBContextHolder;
 import com.noblegasesgoo.middleware.db.router.config.DBRouterConfig;
 import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
@@ -45,7 +45,7 @@ public class DBRouterStrategyHashCode implements IDBRouterStrategy {
         // 计算库索引
         int dbIdx = idx / dbRouterConfig.getDbCount();
         // 库索引边界判断
-        if (dbIdx == Constant.ZERO) {
+        if (dbIdx == BaseConstants.ZERO) {
             dbIdx += 1;
         }
         if (dbIdx > dbRouterConfig.getDbCount()) {

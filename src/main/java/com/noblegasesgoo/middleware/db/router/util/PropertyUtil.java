@@ -1,6 +1,6 @@
 package com.noblegasesgoo.middleware.db.router.util;
 
-import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.common.BaseConstants;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertyResolver;
 
@@ -22,7 +22,7 @@ public class PropertyUtil {
     /**
      * SpringBoot版本
      */
-    private static int springBootVersion = Constant.ONE;
+    private static int springBootVersion = BaseConstants.ONE;
 
     static {
         try {
@@ -31,7 +31,7 @@ public class PropertyUtil {
             Class.forName("org.springframework.boot.bind.RelaxedPropertyResolver");
         } catch (ClassNotFoundException e) {
             // 否则此时的Springboot为2.x版本
-            springBootVersion = Constant.TWO;
+            springBootVersion = BaseConstants.TWO;
         }
     }
 

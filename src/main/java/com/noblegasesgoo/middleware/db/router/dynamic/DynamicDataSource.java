@@ -14,6 +14,10 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
+    /**
+     * 获取当前sql对应数据源数据库
+     * @return 当前sql对应数据源数据库
+     */
     @Override
     protected Object determineCurrentLookupKey() {
         return "db" + DBContextHolder.getDBKey();
