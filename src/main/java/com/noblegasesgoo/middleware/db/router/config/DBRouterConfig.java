@@ -24,12 +24,23 @@ public class DBRouterConfig {
     /**
      * 路由字段
      */
-    private String routerKey;
+    private String key;
 
     /**
      * 该字段在方法中对应参数位置下标
      */
     private String keyIndex;
+
+    /**
+     * 该字段的类型
+     */
+    private String keyType;
+
+    /**
+     * 当前参数class
+     */
+    @Deprecated
+    private Class sourceClass;
 
     public DBRouterConfig() {
     }
@@ -51,16 +62,16 @@ public class DBRouterConfig {
         return tableCount;
     }
 
-    public void setTableCount(int tbCount) {
-        this.tableCount = tbCount;
+    public void setTableCount(int tableCount) {
+        this.tableCount = tableCount;
     }
 
-    public String getRouterKey() {
-        return routerKey;
+    public String getKey() {
+        return key;
     }
 
-    public void setRouterKey(String routerKey) {
-        this.routerKey = routerKey;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getKeyIndex() {
@@ -69,5 +80,21 @@ public class DBRouterConfig {
 
     public void setKeyIndex(String keyIndex) {
         this.keyIndex = keyIndex;
+    }
+
+    public String getKeyType() {
+        return keyType;
+    }
+
+    public void setKeyType(String keyType) {
+        this.keyType = keyType;
+    }
+
+    public Class getSourceClass() {
+        return sourceClass;
+    }
+
+    public void setSourceClass(Class sourceClass) {
+        this.sourceClass = sourceClass;
     }
 }
