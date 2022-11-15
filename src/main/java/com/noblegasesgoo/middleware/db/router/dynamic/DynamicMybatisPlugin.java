@@ -1,7 +1,7 @@
-package com.zhao.middleware.db.router.dynamic;
+package com.noblegasesgoo.middleware.db.router.dynamic;
 
-import com.zhao.middleware.db.router.DBContextHolder;
-import com.zhao.middleware.db.router.annotation.DBRouterStrategy;
+import com.noblegasesgoo.middleware.db.router.DBContextHolder;
+import com.noblegasesgoo.middleware.db.router.annotation.DBRouterStrategy;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;

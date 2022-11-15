@@ -1,4 +1,4 @@
-package com.zhao.middleware.db.router.annotation;
+package com.noblegasesgoo.middleware.db.router.annotation;
 
 import java.lang.annotation.*;
 

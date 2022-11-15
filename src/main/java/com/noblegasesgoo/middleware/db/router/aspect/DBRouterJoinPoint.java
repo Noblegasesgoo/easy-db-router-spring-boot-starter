@@ -1,9 +1,9 @@
-package com.zhao.middleware.db.router.aspect;
+package com.noblegasesgoo.middleware.db.router.aspect;
 
-import com.zhao.middleware.db.router.annotation.DBRouter;
-import com.zhao.middleware.db.router.common.Constant;
-import com.zhao.middleware.db.router.config.DBRouterConfig;
-import com.zhao.middleware.db.router.strategy.IDBRouterStrategy;
+import com.noblegasesgoo.middleware.db.router.annotation.DBRouter;
+import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.config.DBRouterConfig;
+import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -64,7 +64,7 @@ public class DBRouterJoinPoint {
     /**
      * 切点
      */
-    @Pointcut("@annotation(com.zhao.middleware.db.router.annotation.DBRouter)")
+    @Pointcut("@annotation(com.noblegasesgoo.middleware.db.router.annotation.DBRouter)")
     public void aopPoint() {
     }
 

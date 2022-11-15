@@ -1,6 +1,6 @@
-package com.zhao.middleware.db.router.util;
+package com.noblegasesgoo.middleware.db.router.util;
 
-import com.zhao.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.common.Constant;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.PropertyResolver;
 

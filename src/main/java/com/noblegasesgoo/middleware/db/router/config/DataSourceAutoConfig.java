@@ -1,12 +1,12 @@
-package com.zhao.middleware.db.router.config;
+package com.noblegasesgoo.middleware.db.router.config;
 
-import com.zhao.middleware.db.router.aspect.DBRouterJoinPoint;
-import com.zhao.middleware.db.router.common.Constant;
-import com.zhao.middleware.db.router.dynamic.DynamicDataSource;
-import com.zhao.middleware.db.router.dynamic.DynamicMybatisPlugin;
-import com.zhao.middleware.db.router.strategy.IDBRouterStrategy;
-import com.zhao.middleware.db.router.strategy.impl.DBRouterStrategyHashCode;
-import com.zhao.middleware.db.router.util.PropertyUtil;
+import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.dynamic.DynamicDataSource;
+import com.noblegasesgoo.middleware.db.router.dynamic.DynamicMybatisPlugin;
+import com.noblegasesgoo.middleware.db.router.strategy.impl.DBRouterStrategyHashCode;
+import com.noblegasesgoo.middleware.db.router.util.PropertyUtil;
+import com.noblegasesgoo.middleware.db.router.aspect.DBRouterJoinPoint;
+import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
 import org.apache.ibatis.plugin.Interceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.EnvironmentAware;

@@ -1,4 +1,4 @@
-package com.zhao.middleware.db.router.config;
+package com.noblegasesgoo.middleware.db.router.config;
 
 /**
  * @author: noblegasesgoo

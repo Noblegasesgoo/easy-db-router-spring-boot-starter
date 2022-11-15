@@ -1,6 +1,6 @@
-package com.zhao.middleware.db.router.dynamic;
+package com.noblegasesgoo.middleware.db.router.dynamic;
 
-import com.zhao.middleware.db.router.DBContextHolder;
+import com.noblegasesgoo.middleware.db.router.DBContextHolder;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 /**

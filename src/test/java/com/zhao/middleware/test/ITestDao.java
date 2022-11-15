@@ -1,6 +1,6 @@
 package com.zhao.middleware.test;
 
-import com.zhao.middleware.db.router.annotation.DBRouter;
+import com.noblegasesgoo.middleware.db.router.annotation.DBRouter;
 
 /**
  * @author: noblegasesgoo

@@ -1,9 +1,9 @@
-package com.zhao.middleware.db.router.strategy.impl;
+package com.noblegasesgoo.middleware.db.router.strategy.impl;
 
-import com.zhao.middleware.db.router.DBContextHolder;
-import com.zhao.middleware.db.router.common.Constant;
-import com.zhao.middleware.db.router.config.DBRouterConfig;
-import com.zhao.middleware.db.router.strategy.IDBRouterStrategy;
+import com.noblegasesgoo.middleware.db.router.common.Constant;
+import com.noblegasesgoo.middleware.db.router.DBContextHolder;
+import com.noblegasesgoo.middleware.db.router.config.DBRouterConfig;
+import com.noblegasesgoo.middleware.db.router.strategy.IDBRouterStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
